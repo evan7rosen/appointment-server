@@ -1,75 +1,37 @@
 const knex = require("../db/knex");
 
-exports.getAllBooks = function(req, res) {
-  // With Knex Raw
-  // knex.raw(`SELECT * from books`).then(books => res.json(books.rows))
-  // With Knex query builder - long hand
-  // knex
-  //   .select()
-  //   .table('books')
-  //   .then(books => res.json(books))
-
-  // With Knex query builder - short hand
-  knex("books").then(books => res.json(books));
+exports.getAllAppointments = function(req, res) {
+  knex("appointments").then(appointments => res.json(appointments));
 };
 
-exports.getOneBook = function(req, res) {
-  // With Knex Raw
-  // knex.raw(`SELECT * from books WHERE id = ${req.params.id}`).then(book => res.json(book.rows))
-
-  // With Knex query builder
-  // knex
-  //   .select()
-  //   .table('books')
-  //   .where('id', req.params.id)
-  //   .then(book => res.json(book))
-
-  // With Knex query builder - short hand
-  knex("books")
+exports.getOneAppointment = function(req, res) {
+  knex("appointments")
     .where("id", req.params.id)
-    .then(books => res.json(books));
+    .then(appointments => res.json(appointments));
 };
 
-exports.addOneBook = function(req, res) {
-  // With Knex Raw
-  // knex.raw(
-  //  `INSERT INTO books (title, author, pages, genre_id) VALUES ('${req.body.title}', '${req.body.author}', ${req.body.pages}, ${genre_id})`
-  //  )
-
-  // With Knex query builder
-  knex("books")
+exports.addOneAppointment = function(req, res) {
+  knex("appointments")
     .insert(req.body)
     .returning("*")
-    .then(newBook => res.json(newBook));
+    .then(newAppointment => res.json(newAppointment));
 };
 
-exports.updateOneBook = function(req, res) {
-  // With Knex Raw
-  // knex.raw(
-  //  `UPDATE books SET title = '${req.body.title}', author = '${req.body.author}', pages = ${req.body.pages}, genre_id = ${genre_id}) WHERE id = ${req.params.id}`
-  //  )
-
-  // With Knex query builder
-  knex("books")
+exports.updateOneAppointment = function(req, res) {
+  knex("appointments")
     .update({
       ...req.body,
       updated_at: new Date()
     })
     .where("id", req.params.id)
     .returning("*")
-    .then(updatedBook => res.json(updatedBook));
+    .then(updatedAppointment => res.json(updatedAppointment));
 };
 
-exports.removeOneBook = function(req, res) {
-  // With Knex Raw
-  // knex.raw(
-  //  `DELETE FROM books WHERE id = ${req.params.id}`
-  // )
-
-  // With Knex query builder
-  knex("books")
+exports.removeOneAppointment = function(req, res) {
+  knex("appointments")
     .del()
     .where("id", req.params.id)
     .returning("*")
-    .then(newBook => res.json(newBook));
+    .then(newAppointment => res.json(newAppointment));
 };
