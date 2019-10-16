@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const booksController = require("../controllers/books");
+const appointmentsController = require("../controllers/appointments");
 
-/* GET all books */
-router.get("/", booksController.getAllBooks);
-router.get("/:id", booksController.getOneBook);
-router.post("/", booksController.addOneBook);
-router.patch("/:id", booksController.updateOneBook);
-router.delete("/:id", booksController.removeOneBook);
+/* GET all appointments */
+router.get("/", appointmentsController.getAllappointments);
+router.get("/:id", appointmentsController.getOneAppointment);
+router.post("/", appointmentsController.addOneAppointment);
+router.patch("/:id", appointmentsController.updateOneAppointment);
+router.delete("/:id", appointmentsController.removeOneAppointment);
 
 module.exports = router;
