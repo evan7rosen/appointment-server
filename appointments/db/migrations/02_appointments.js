@@ -4,15 +4,7 @@ exports.up = function(knex) {
     table.string("title").notNullable();
     table.string("body").notNullable();
     table.string("location").notNullable();
-    table.boolean("completed").notNullable();
-    table
-      .integer("user_id")
-      .references("id")
-      .inTable("users");
-    table
-      .integer("guest_id")
-      .references("id")
-      .inTable("users");
+    table.string("time").notNullable();
     table.timestamps(true, true);
   });
 };
